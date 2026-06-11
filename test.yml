@@ -1,1 +1,16 @@
 ---
+- hosts: localhost
+  tasks:
+    - name: get hostname
+      shell: hostname
+      register: machine_name
+    - name: get uptime
+      shell: uptime
+      register: machine_uptime     
+    - name: print hostname
+      debug:
+        var: machine_name
+
+    - name: print uptime
+      debug:
+        var: machine_uptime         
