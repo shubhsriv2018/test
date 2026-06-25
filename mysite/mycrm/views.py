@@ -1,4 +1,4 @@
-#from .models import Customer
+from .models import Customer
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
@@ -32,4 +32,12 @@ def login_view(request):
 
 @login_required
 def index(request):
-    return render(request, 'mycrm/index.html')
+    customers = Customer.objects.all()
+    
+    return render(
+    request, 
+    'mycrm/index.html', 
+    { 
+        'customers' : customers 
+    }
+)

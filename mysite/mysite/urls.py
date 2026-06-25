@@ -22,6 +22,6 @@ from mycrm.views import login_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path('', index, name='index'),
-    path('login/', login_view, name='login'),
+    path("index/", index, name='index'),
+    path('', login_view, name='login'),
 ]
