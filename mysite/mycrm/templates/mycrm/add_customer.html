@@ -1,0 +1,13 @@
+<h2>Add Customer</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    {{form.as_p}}
+
+    <button type="submit">Save</button>
+</form>
+
+<br>
+
+<a href="{% url 'index' %}">Back to Dashboard</a>

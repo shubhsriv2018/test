@@ -19,9 +19,11 @@ from django.contrib import admin
 from django.urls import path
 from mycrm.views import index
 from mycrm.views import login_view
+from mycrm.views import add_customer
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("index/", index, name='index'),
     path('', login_view, name='login'),
+    path('customer/add/', add_customer, name='add_customer'),
 ]
