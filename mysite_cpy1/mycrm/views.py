@@ -3,6 +3,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
+from .forms import CustomerForm
+from django.shortcuts import get_object_or_404
 
 def login_view(request):
     if request.method == 'POST':
@@ -41,3 +43,27 @@ def index(request):
         'customers' : customers 
     }
 )
+
+def add_customer(request):
+    if request.method == "POST":
+        form = CustomerForm(request.POST)
+
+        if form.is_valid():
+            form.save()
+            return redirect('index')
+    else:
+        form = CustomerForm()
+
+    return render(
+        request,
+        "mycrm/add_customer.html",
+        {"form": form}
+    )
+
+
+def delete_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+
+    customer.delete()
+
+    return redirect('index')
