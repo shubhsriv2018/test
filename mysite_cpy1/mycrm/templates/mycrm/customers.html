@@ -1,0 +1,25 @@
+{% extends 'mycrm/base.html' %}
+
+{% block content %}
+
+<h2>Customers</h2>
+
+<table border="1" cellpadding="10">
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+    </tr>
+
+    {% for customer in customers %}
+    <tr>
+        <td>{{ customer.id }}</td>
+        <td>{{ customer.name }}</td>
+        <td>{{ customer.email }}</td>
+        <td>{{ customer.phone }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

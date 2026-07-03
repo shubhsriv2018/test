@@ -67,3 +67,28 @@ def delete_customer(request, customer_id):
     customer.delete()
 
     return redirect('index')
+
+#@login_required
+def customers(request):
+    customers = Customer.objects.all()
+
+    return render(
+        request,
+        'mycrm/customers.html',
+        {
+            'customers': customers
+        }
+    )
+
+
+#@login_required
+def leads(request):
+    total_customers = Customer.objects.count()
+
+    return render(
+        request,
+        'mycrm/leads.html',
+        {
+            'total_customers': total_customers
+        }
+    )

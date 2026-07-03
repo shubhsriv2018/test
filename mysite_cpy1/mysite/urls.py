@@ -21,11 +21,15 @@ from mycrm.views import index
 from mycrm.views import login_view
 from mycrm.views import add_customer
 from mycrm.views import delete_customer
+from mycrm.views import customers
+from mycrm.views import leads
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("index/", index, name='index'),
     path('', login_view, name='login'),
+    path('customers/', customers, name='customers'),
+    path('leads/', leads, name='leads'),
     path('customer/add/', add_customer, name='add_customer'),
     path('customer/delete/<int:customer_id>/', delete_customer, name='delete_customer'),
 ]
