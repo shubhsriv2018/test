@@ -105,3 +105,30 @@ def add_customer(request):
             "mycrm/add_customer.html",
             {"form": form}
         )
+
+def delete_customer(request, customer_id):
+    customer = get_object_or_404(Customer, id=customer_id)
+    customer.delete()
+    return redirect('index')
+
+def customers(request):
+    customers = Customer.objects.all()
+
+    return render(
+        request,
+        'mycrm/customers.html',
+        {
+            'customers' : customers
+        }
+    )
+
+def leads(request):
+    total_customers = Customer.objects.count()
+
+    return render(
+        request,
+        'mycrm/leads.html',
+        {
+            'total_customers' : total_customers
+        }
+    )

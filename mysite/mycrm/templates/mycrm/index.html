@@ -1,29 +1,185 @@
 {% extends 'mycrm/base.html' %}
 
 {% block content %}
-<h1>CRM Tool</h1>
-<p>Welcome to our CRM tool<p>
 
-    <a href="{% url 'add_customer' %}">
-        <button>Add Customer</button>
-    </a>
-    
-    <h2>Customer Dashboard</h2>
+<style>
+    body{
+        background:#f4f7fb;
+        font-family:Arial, Helvetica, sans-serif;
+    }
 
-    <table border=""1" cleepadding="10">
-        <tr>
-            <th>ID</th>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Phone</th>
-        </tr>
-        {% for customer in customers %}
-        <tr>
-            <td>{{customer.id}}</td>
-            <td>{{customer.name}}</td>
-            <td>{{customer.email}}</td>
-            <td>{{customer.phone}}</td>
-        </tr>
-        {% endfor %}
-    </table>
+    .container{
+        width:90%;
+        margin:30px auto;
+    }
+
+    .header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:25px;
+    }
+
+    .header h1{
+        color:#2563eb;
+        margin:0;
+    }
+
+    .welcome{
+        color:#666;
+        margin-top:5px;
+        margin-bottom:20px;
+        font-size:16px;
+    }
+
+    .btn{
+        padding:12px 22px;
+        border:none;
+        border-radius:8px;
+        font-size:15px;
+        font-weight:bold;
+        cursor:pointer;
+        text-decoration:none;
+        transition:.3s;
+    }
+
+    .btn-add{
+        background:#2563eb;
+        color:white;
+    }
+
+    .btn-add:hover{
+        background:#1d4ed8;
+        transform:translateY(-2px);
+    }
+
+    .btn-delete{
+        background:#dc2626;
+        color:white;
+        padding:8px 15px;
+        border:none;
+        border-radius:6px;
+        cursor:pointer;
+        transition:.3s;
+    }
+
+    .btn-delete:hover{
+        background:#b91c1c;
+    }
+
+    .dashboard-card{
+        background:white;
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 10px 20px rgba(0,0,0,.08);
+    }
+
+    .dashboard-card h2{
+        color:#333;
+        margin-bottom:20px;
+    }
+
+    table{
+        width:100%;
+        border-collapse:collapse;
+    }
+
+    th{
+        background:#2563eb;
+        color:white;
+        padding:14px;
+        text-align:left;
+    }
+
+    td{
+        padding:14px;
+        border-bottom:1px solid #ddd;
+    }
+
+    tr:nth-child(even){
+        background:#f9fbff;
+    }
+
+    tr:hover{
+        background:#eef5ff;
+    }
+
+    .total{
+        background:#e0edff;
+        padding:15px;
+        border-radius:10px;
+        margin-bottom:20px;
+        font-size:18px;
+        font-weight:bold;
+        color:#2563eb;
+    }
+</style>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>📋 CRM Dashboard</h1>
+            <p class="welcome">
+                Welcome to the Customer Relationship Management System
+            </p>
+        </div>
+
+        <a href="{% url 'add_customer' %}" class="btn btn-add">
+            ➕ Add Customer
+        </a>
+    </div>
+
+    <div class="dashboard-card">
+
+        <div class="total">
+            👥 Total Customers : {{ customers|length }}
+        </div>
+
+        <h2>Customer List</h2>
+
+        <table>
+
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Action</th>
+            </tr>
+
+            {% for customer in customers %}
+
+            <tr>
+                <td>{{ customer.id }}</td>
+                <td>{{ customer.name }}</td>
+                <td>{{ customer.email }}</td>
+                <td>{{ customer.phone }}</td>
+
+                <td>
+                    <a href="{% url 'delete_customer' customer.id %}">
+                        <button class="btn-delete">
+                            🗑 Delete
+                        </button>
+                    </a>
+                </td>
+
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="5" style="text-align:center;padding:25px;">
+                    No customers found.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </table>
+
+    </div>
+
+</div>
+
 {% endblock %}

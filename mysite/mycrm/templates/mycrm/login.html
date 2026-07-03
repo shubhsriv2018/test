@@ -1,33 +1,139 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-	<title> CRM Tool Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CRM Tool Login</title>
+
+    <style>
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:Arial, Helvetica, sans-serif;
+        }
+
+        body{
+            background:linear-gradient(135deg,#4f46e5,#2563eb);
+            height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+        }
+
+        .login-card{
+            width:380px;
+            background:#fff;
+            padding:40px;
+            border-radius:15px;
+            box-shadow:0 15px 35px rgba(0,0,0,0.25);
+        }
+
+        .login-card h1{
+            text-align:center;
+            color:#2563eb;
+            margin-bottom:10px;
+        }
+
+        .login-card p.subtitle{
+            text-align:center;
+            color:#666;
+            margin-bottom:30px;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            font-weight:bold;
+            color:#444;
+        }
+
+        input{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:8px;
+            margin-bottom:20px;
+            font-size:15px;
+            transition:.3s;
+        }
+
+        input:focus{
+            outline:none;
+            border-color:#2563eb;
+            box-shadow:0 0 8px rgba(37,99,235,.3);
+        }
+
+        button{
+            width:100%;
+            padding:13px;
+            background:#2563eb;
+            color:white;
+            border:none;
+            border-radius:8px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:.3s;
+        }
+
+        button:hover{
+            background:#1d4ed8;
+            transform:translateY(-2px);
+        }
+
+        .error{
+            background:#ffe5e5;
+            color:#d00000;
+            padding:10px;
+            border-radius:8px;
+            margin-bottom:20px;
+            text-align:center;
+        }
+
+        .footer{
+            text-align:center;
+            margin-top:25px;
+            color:#777;
+            font-size:13px;
+        }
+    </style>
 </head>
+
 <body>
 
-    <h2>CRM Login</h2>
+<div class="login-card">
+
+    <h1>CRM Tool</h1>
+    <p class="subtitle">Welcome Back 👋</p>
 
     {% if messages %}
         {% for message in messages %}
-            <p style="color:red">{{message}}</p>
+            <div class="error">
+                {{ message }}
+            </div>
         {% endfor %}
     {% endif %}
 
     <form method="post">
         {% csrf_token %}
 
-        <p>
-            Username:
-            <input type="text" name="username">
-        </p>
+        <label>Username</label>
+        <input type="text" name="username" placeholder="Enter Username" required>
 
-        <p>
-            Password:
-            <input type="password" name="password">
-        </p>
- 
-        <button type="submit">Login</button>
+        <label>Password</label>
+        <input type="password" name="password" placeholder="Enter Password" required>
+
+        <button type="submit">
+            Login
+        </button>
     </form>
+
+    <div class="footer">
+        CRM Management System
+    </div>
+
+</div>
 
 </body>
 </html>
